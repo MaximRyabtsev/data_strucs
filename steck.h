@@ -1,15 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
-struct node{
+struct node_st{
+
 	
 	void* value;
-	struct node* next;
+	struct node_st* next;
 
 };
 
 struct steck{
 
-	struct node* top;
+	struct node_st* top;
 
 };
 
@@ -20,6 +21,16 @@ void create_st(struct steck* st){
 	st->top = NULL;
 }
 
+/*
+ * Проверка на пустой стек
+ */
+int emp(struct steck* st){
+
+	if(st->top == NULL)
+		return 1;
+	return 0;
+
+}
 
 /*
  * Добавление элемента в стек
@@ -27,7 +38,7 @@ void create_st(struct steck* st){
  */
 void push(struct steck* st, void* value){
 
-	struct node* apple = malloc(sizeof(struct node));
+	struct node_st* apple = malloc(sizeof(struct node_st));
 	apple->value = value;
 	apple->next = st->top;
 	st->top = apple;
@@ -43,7 +54,7 @@ void* pop(struct steck* st){
 	if(st->top == NULL){
 		return NULL;
 	}
-	struct node* peach = st->top;
+	struct node_st* peach = st->top;
 	void* value = st->top->value;
 	st->top = st->top->next;
 	free(peach);
